@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>
+        Boxing
+    </title>
+
+</head>
+<body>
+    <nav class="navbar-container container">
+		<b><a href="/" class="home-link">hi</a></b>
+		<button type="button" class="navbar-toggle" aria-label="Open">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<div class="navbar-menu">
+			<ul class="navbar-links">
+				<li class="navbar-item"><a class="navbar-link" href="/about.html">Coaches</a></li>
+				<li class="navbar-item"><a class="navbar-link" href="/blog">Fighters</a></li>
+				<li class="navbar-item"><a class="navbar-link" href="/contact.html">Stadium</a></li>
+				<li class="navbar-item"><a class="navbar-link" href="/donate.html">Referee</a></li>
+				<li class="navbar-item"><a class="navbar-link" href="/learn.html">Sponsor</a></li>
+				<li class="navbar-item"><a class="navbar-link" href="/projects.html">Add information</a></li>
+			</ul>
+		</div>
+	</nav>
+    <form class="grid" action="/result" method = "post">
+        {% if name %}
+        <h3 style="color:red;">Hello {{name}}, How are you?</h3>
+        {% endif %}
+        <label for = "Name">Enter your name:</label>
+        <input type="text" name="name">
+        <input type="Submit" class= "file_submit">
+    </form>
+
+</body>
+</html>
