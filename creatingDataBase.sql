@@ -13,11 +13,11 @@
 --Insert into Fighters(Max,Teddy Atlas,22/5/1,5, 1,140000,1,11);
 
 --1 choose which boxer is better than the other
--- SELECT f2.f_name
--- FROM Fighters f1, Fighters f2
--- where f1.f_wins < f2.f_wins
--- and f1.f_name = 'Canelo'
--- and f2.f_name = 'Manny Pacquiao';
+SELECT f2.f_name
+FROM Fighters f1, Fighters f2
+where f1.f_wins < f2.f_wins
+and f1.f_name = 'Canelo'
+and f2.f_name = 'Manny Pacquiao';
 --2 choose which stadium is the biggest
 -- SELECT st2.st_name, st2.st_size
 -- FROM Stadium st1, Stadium st2
