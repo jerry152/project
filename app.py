@@ -43,6 +43,16 @@ def result():
 
     return render_template("index.html", name = name)
 
+@app.route("/bestFighter",methods = ['POST', "GET"])
+def bestFighter():
+    results1 = request.form['fighter1']
+    results2 = request.form['fighter2']
+    print(results1,results2)
+    database = r"boxing.sqlite"
+    conn = openConnection(database)
+
+
+    return render_template("fighter.html",fighter = results1)
 
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
