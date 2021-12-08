@@ -30,6 +30,10 @@ def sponsor():
 @app.route("/stadium")
 def stadium():
     return render_template("stadium.html")
+
+@app.route("/info")
+def info():
+    return render_template("info.html")
     
 
 @app.route("/result",methods = ['POST', "GET"])
