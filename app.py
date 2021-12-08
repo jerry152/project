@@ -5,11 +5,21 @@ from sqlite3 import Error
 
 app = Flask(__name__)
 
+#ROUTING FOR HOME PAGE
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("index.html")
 
+@app.route("/result",methods = ['POST', "GET"])
+def result():
+    output = request.form.to_dict()
+    name = output["name"]
+    return render_template("index.html", name = name)
+
+
+
+#ROUTING FOR COACHES
 @app.route("/coaches")
 def coaches():
     c = sqlite3.connect(r"boxing.sqlite")
@@ -19,6 +29,8 @@ def coaches():
     return render_template("coaches.html", data = data)
     
 
+
+#ROUTING FOR FIGHTERS
 @app.route("/fighter")
 def fighter():
     c = sqlite3.connect(r"boxing.sqlite")
@@ -26,42 +38,7 @@ def fighter():
     mycursor.execute("SELECT * FROM Fighters")
     data = mycursor.fetchall()
     return render_template("fighter.html", data = data)
-
-@app.route("/referee")
-def referee():
-    c = sqlite3.connect(r"boxing.sqlite")
-    mycursor = c.cursor()
-    mycursor.execute("SELECT * FROM Referee")
-    data = mycursor.fetchall()
-    return render_template("referee.html", data = data)
-
-@app.route("/sponsor")
-def sponsor():
-    c = sqlite3.connect(r"boxing.sqlite")
-    mycursor = c.cursor()
-    mycursor.execute("SELECT s_name FROM Sponsors")
-    data = mycursor.fetchall()
-    return render_template("sponsor.html", data = data)
-
-@app.route("/stadium")
-def stadium():
-    c = sqlite3.connect(r"boxing.sqlite")
-    mycursor = c.cursor()
-    mycursor.execute("SELECT * FROM Stadium")
-    data = mycursor.fetchall()
-    return render_template("stadium.html", data = data)
-
-@app.route("/info")
-def info():
-    return render_template("info.html")
     
-
-@app.route("/result",methods = ['POST', "GET"])
-def result():
-    output = request.form.to_dict()
-    name = output["name"]
-    return render_template("index.html", name = name)
-
 @app.route("/bestFighter",methods = ['POST', "GET"])
 def bestFighter():
     results1 = request.form['fighter1']
@@ -88,6 +65,53 @@ def bestFighter():
 
 
     return render_template("fighter.html",fighter = query, data = data)
+
+
+
+#ROUTING FOR REFEREES
+@app.route("/referee")
+def referee():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Referee")
+    data = mycursor.fetchall()
+    return render_template("referee.html", data = data)
+
+
+
+#ROUTING FOR SPONSOR PAGE
+@app.route("/sponsor")
+def sponsor():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT s_name FROM Sponsors")
+    data = mycursor.fetchall()
+
+    results1 = request.form['sponsor1']
+    print(results1)
+    return render_template("sponsor.html", data = data)
+
+
+
+#ROUTING FOR STADIUM PAGE
+@app.route("/stadium")
+def stadium():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    return render_template("stadium.html", data = data)
+
+
+
+#ROUTING FOR INFO PAGE
+@app.route("/info")
+def info():
+    return render_template("info.html")
+
+
+
+
 
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
