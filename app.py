@@ -87,9 +87,25 @@ def sponsor():
     mycursor.execute("SELECT s_name FROM Sponsors")
     data = mycursor.fetchall()
 
-    results1 = request.form['sponsor1']
-    print(results1)
     return render_template("sponsor.html", data = data)
+
+@app.route("/sponsorQ",methods = ['POST', "GET"])
+def sponsorQ():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT s_name FROM Sponsors")
+    data = mycursor.fetchall()
+    results1 = request.form['sponsor1']
+    sql = """
+    -- SELECT s_name, r_name
+    FROM Sponsors
+    JOIN SponsoredFighter on s_sponsorKey = sp_sponsorKey
+    JOIN Fighters on sp_fighterKey = f_fighterKey
+    JOIN Regions on f_cityKey = r_cityKey
+    WHERE r_country = 'USA'
+    AND s_televised = 'yes'
+    """
+    return render_template("sponsor.html", data = data, sponsor = results1)
 
 
 

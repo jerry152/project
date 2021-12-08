@@ -36,7 +36,7 @@
            </tbody>
        </table>
 
-    <form class="grid" action="/sponsor" method="post">
+    <form class="grid" action="/sponsorQ" method="post">
         <div class = "d-inline">
         <label for = "query1">Choose a sponsor,to see their fighters and country </label>
         <select name="sponsor1" id="sponsor">
@@ -52,9 +52,9 @@
     </div>
     </form>
 
-    {%if sponsor%}
-        <h3>best sponsor</h3>
-    {%endif%}
+    {% if sponsor %}
+        <h3>{{sponsor}} sponsors {{fighter}} and is from {{country}}}</h3>
+    {% endif %}
 
 
 
