@@ -11,6 +11,30 @@
 </head>
 <body>
     {% include 'navbar.html' %}
+    
+    <style>
+        td {
+               width: 150px;
+               text-align: center;
+               border: 1px solid black;
+               padding: 5px;
+             }
+       </style>
+       <table>
+         <thead>
+           <tr>
+               <th>Sponsors</th>
+           </tr>
+           </thead>    
+           <tbody>
+            {% for row in data %}    
+                   
+                <td>{{row[0]}}</td>
+                       
+                   
+               {% endfor %}
+           </tbody>
+       </table>
 
     <form class="grid" action="/bestFighter" method="post">
         <div class = "d-inline">
@@ -36,6 +60,8 @@
     {%if sponsor%}
         <h3>best sponsor</h3>
     {%endif%}
+
+
 
 </body>
 </html>

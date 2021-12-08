@@ -11,6 +11,30 @@
 </head>
 <body>
     {% include 'navbar.html' %}
+
+    <style>
+        td {
+               width: 150px;
+               text-align: center;
+               border: 1px solid black;
+               padding: 5px;
+             }
+       </style>
+       <table>
+         <thead>
+           <tr>
+               <th>Coaches</th>
+           </tr>
+           </thead>    
+           <tbody>
+            {% for row in data %}    
+                   
+                <td>{{row[0]}}</td>
+                       
+                   
+               {% endfor %}
+           </tbody>
+       </table>
     
 
 </body>

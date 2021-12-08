@@ -12,31 +12,44 @@ def home():
 
 @app.route("/coaches")
 def coaches():
-    return render_template("coaches.html")
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Coaches")
+    data = mycursor.fetchall()
+    return render_template("coaches.html", data = data)
     
 
 @app.route("/fighter")
 def fighter():
     c = sqlite3.connect(r"boxing.sqlite")
     mycursor = c.cursor()
-
     mycursor.execute("SELECT * FROM Fighters")
     data = mycursor.fetchall()
     return render_template("fighter.html", data = data)
 
 @app.route("/referee")
 def referee():
-    return render_template("referee.html")
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Referee")
+    data = mycursor.fetchall()
+    return render_template("referee.html", data = data)
 
 @app.route("/sponsor")
 def sponsor():
-    
-    return render_template("sponsor.html")
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT s_name FROM Sponsors")
+    data = mycursor.fetchall()
+    return render_template("sponsor.html", data = data)
 
 @app.route("/stadium")
 def stadium():
-
-    return render_template("stadium.html")
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    return render_template("stadium.html", data = data)
 
 @app.route("/info")
 def info():
@@ -47,7 +60,6 @@ def info():
 def result():
     output = request.form.to_dict()
     name = output["name"]
-
     return render_template("index.html", name = name)
 
 @app.route("/bestFighter",methods = ['POST', "GET"])
@@ -71,7 +83,6 @@ def bestFighter():
     _conn.execute(sql,args)
     query = _conn.fetchall()
     print(query)
-
     _conn.execute("SELECT * FROM Fighters")
     data = _conn.fetchall()
 
