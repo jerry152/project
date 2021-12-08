@@ -53,11 +53,14 @@ def bestFighter():
     results1 = request.form['fighter1']
     results2 = request.form['fighter2']
     print(results1,results2)
-    database = r"boxing.sqlite"
-    conn = openConnection(database)
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+
+    mycursor.execute("SELECT * FROM Fighters")
+    data = mycursor.fetchall()
 
 
-    return render_template("fighter.html",fighter = results1)
+    return render_template("fighter.html",fighter = results1, data = data)
 
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
