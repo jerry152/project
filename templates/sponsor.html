@@ -12,6 +12,30 @@
 <body>
     {% include 'navbar.html' %}
 
+    <form class="grid" action="/bestFighter" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Choose a sponsor, and a country to see their fighters</label>
+        <select name="stadium1" id="fighter">
+            <option value="Burger King">Burger King</option>
+            <option value="Under Armor">Under Armor</option>
+            <option value="Adidas">Adidas</option>
+            <option value="Budlight">Budlight</option>
+            <option value="Nike">Nike</option>
+            <option value="Corona">Corona</option>
+            <option value="Modelo">Modelo</option>
+        </select>
+        <select name="country" id="fighter">
+            <option value="USA">USA</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Mexico">Mexico</option>
+        </select>
+        <input type="Submit" class = "file_submit" value="check">
+    </div>
+    </form>
+
+    {%if sponsor%}
+        <h3>best sponsor</h3>
+    {%endif%}
 
 </body>
 </html>

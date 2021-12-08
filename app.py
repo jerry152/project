@@ -30,11 +30,12 @@ def referee():
 
 @app.route("/sponsor")
 def sponsor():
+    
     return render_template("sponsor.html")
 
 @app.route("/stadium")
 def stadium():
-    
+
     return render_template("stadium.html")
 
 @app.route("/info")
