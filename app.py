@@ -10,6 +10,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route("/coaches")
+def coaches():
+    return render_template("coaches.html")
+
 @app.route("/result",methods = ['POST', "GET"])
 def result():
     output = request.form.to_dict()
