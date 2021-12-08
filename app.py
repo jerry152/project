@@ -129,6 +129,31 @@ def info():
 
 
 
+    # gonna show the user how much money a selected fighter has made 
+@app.route("/MoneySponsor",methods = ['POST', "GET"])
+def MoneySponsor():
+    results1 = request.form['fighter1']
+    print(results1)
+    database = r"boxing.sqlite"
+    conn = openConnection(database)
+    _conn = conn.cursor()
+    sql = """ select sum(s_pay)
+    FROM Fighters, Sponsors, SponsoredFighter
+    where f_name = ?
+    and s_sponsorKey = sp_sponsorKey
+    and f_fighterKey = sp_fighterKey
+    """
+    args = [results1]
+    _conn.execute(sql,args)
+    query = _conn.fetchall()
+    print(query)
+    _conn.execute("SELECT s_name FROM Sponsors")
+    data = _conn.fetchall()
+
+
+    return render_template("sponsor.html",fighter = query, data = data, name = results1)
+
+
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
     print("Open database: ", _dbFile)
