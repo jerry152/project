@@ -13,6 +13,7 @@ def home():
 @app.route("/coaches")
 def coaches():
     return render_template("coaches.html")
+    
 
 @app.route("/result",methods = ['POST', "GET"])
 def result():
