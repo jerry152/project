@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 import sqlite3
 from sqlite3 import Error
 #hello
@@ -17,7 +17,12 @@ def coaches():
 
 @app.route("/fighter")
 def fighter():
-    return render_template("fighter.html")
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+
+    mycursor.execute("SELECT * FROM Fighters")
+    data = mycursor.fetchall()
+    return render_template("fighter.html", data = data)
 
 @app.route("/referee")
 def referee():
@@ -76,8 +81,7 @@ def findFighter(_conn):
     sql = """
     SELECT f_name,max(f_wins)
     FROM Fighters
-    JOIN Regions on f_cityKey = r_cityKey
-    WHERE r_country != 'USA';
+    JOIN Regions on f_cityKey = r_cityKey;
     """
     c.execute(sql)
     tuples = c.fetchall()
