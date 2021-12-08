@@ -35,8 +35,13 @@
                {% endfor %}
            </tbody>
        </table>
+<<<<<<< Updated upstream
 
     <form class="grid" action="/sponsor" method="post">
+=======
+
+    <form class="grid" action="/bestFighter" method="post">
+>>>>>>> Stashed changes
         <div class = "d-inline">
         <label for = "query1">Choose a sponsor,to see their fighters and country </label>
         <select name="sponsor1" id="sponsor">
@@ -55,6 +60,30 @@
     {%if sponsor%}
         <h3>best sponsor</h3>
     {%endif%}
+
+   
+    <form class="grid" action="/MoneySponsor" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Choose a fighters to see money made from sponsor</label>
+        <select name="fighter1" id="fighter">
+            <option value="Canelo">Canelo</option>
+            <option value="Gennedy Golovken">Gennedy Golovken</option>
+            <option value="Floyd Mayweatther">Floyd Mayweatther</option>
+            <option value="Deontay Wilder">Deontay Wilder</option>
+            <option value="Manny Pacquiao">Manny Pacquiao</option>
+            <option value="Mike Tyson">Mike Tyson</option>
+            <option value="Andy Ruiz jr">Andy Ruiz jr</option>
+            <option value="Tyson Fury">Tyson Fury</option>
+            <option value="Anthony Joshua">Anthony Joshua</option>
+            <option value="Boxer">Boxer</option>
+        </select>
+        <input type="Submit" class = "file_submit" value="check">
+    </div>
+    </form>
+
+    {%if fighter %}
+        <h3>{{name}} made from Sponsors {{fighter}} per hour</h3>
+    {%endif%} 
 
 
 
