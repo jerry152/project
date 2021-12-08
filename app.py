@@ -15,6 +15,23 @@ def coaches():
     return render_template("coaches.html")
     
 
+@app.route("/fighter")
+def fighter():
+    return render_template("fighter.html")
+
+@app.route("/referee")
+def referee():
+    return render_template("referee.html")
+
+@app.route("/sponsor")
+def sponsor():
+    return render_template("sponsor.html")
+
+@app.route("/stadium")
+def stadium():
+    return render_template("stadium.html")
+    
+
 @app.route("/result",methods = ['POST', "GET"])
 def result():
     output = request.form.to_dict()
