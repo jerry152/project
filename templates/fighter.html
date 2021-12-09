@@ -81,6 +81,7 @@
           {% endfor %}
       </tbody>
   </table>
+  
 {% endif %}
 
 
@@ -118,6 +119,35 @@
     {% if fighter %}
     <h3>The better fighter is {{fighter}}</h3>
     {% endif %}
+
+
+
+    
+    <form class="grid" action="/fighterCity" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Choose a Fighter to see where they are form</label>
+        <select name="fighter1" id="fighter">
+            <option value="Canelo">Canelo</option>
+            <option value="Gennedy Golovken">Gennedy Golovken</option>
+            <option value="Floyd Mayweatther ">Floyd Mayweatther</option>
+            <option value="Deontay Wilder">Deontay Wilder</option>
+            <option value="Manny Pacquiao">Manny Pacquiao</option>
+            <option value="Mike Tyson">Mike Tyson</option>
+            <option value="Andy Ruiz jr">Andy Ruiz jr</option>
+            <option value="Tyson Fury">Tyson Fury</option>
+            <option value="Anthony Joshua">Anthony Joshua</option>
+            <option value="Boxer">Boxer</option>
+        </select>
+        <input type="Submit" class = "file_submit" value="check">
+    </div>
+    </form>
+
+    {%if city %}
+        <h3>{{name}} is form {{city}}</h3>
+    {%endif%} 
+
+
+
     <br/>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

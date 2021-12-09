@@ -107,20 +107,6 @@ WHERE r_country != 'USA';
 --         FROM Coaches
 --     )
 -- );
-    SELECT st_name, MAX(st_size), st_maxpeople
-    FROM Stadium
-    JOIN Regions on st_cityKey = r_cityKey
-    WHERE r_state = 'California';
-
-    SELECT st_name, st_maxpeople
-    FROM Stadium
-    WHERE st_maxpeople >= '4'
-    GROUP BY st_name;
-
-    SELECT rf_name, r_name, r_state
-    FROM Referee
-    JOIN Regions on rf_cityKey = r_cityKey
-    WHERE r_state = 'New York';
 --16 Which fighter has the best win to loss ratio
 -- SELECT f_name
 -- FROM(
@@ -208,8 +194,7 @@ and f_coachName = c_name;
 
 SELECT r_name, r_state, r_country
 FROM  Coaches, Regions
-WHERE c_name = 'Freddie Roach'
-and f_coachName = c_name
+WHERE c_name = 'Chepo Reynoso'
 and c_citykey = r_cityKey;
 
 

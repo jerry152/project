@@ -51,6 +51,7 @@ and f_coachName = c_name;
 
 
     return render_template("coaches.html",fighter = query, data = data, name = results1)
+
 #where are the coaches from
 @app.route("/coachesCity",methods = ['POST', "GET"])
 def coachesCity():
@@ -135,7 +136,29 @@ Where f_name = ?
 
     return render_template("fighter.html",Rec = query, data = data, name = results3)
     
+# where the fighters are from
+@app.route("/fighterCity",methods = ['POST', "GET"])
+def fighterCity():
+    results2 = request.form['fighter1']
+    print(results2)
+    database = r"boxing.sqlite"
+    conn = openConnection(database)
+    _conn = conn.cursor()
+    sql = """ 
+SELECT r_name, r_state, r_country
+FROM  Fighters, Regions
+WHERE f_name = ?
+and f_citykey = r_cityKey;
+    """
+    args = [results2]
+    _conn.execute(sql,args)
+    query = _conn.fetchall()
+    print(query)
+    _conn.execute("SELECT * FROM Fighters")
+    data = _conn.fetchall()
 
+
+    return render_template("fighter.html",city = query, data = data, name = results2)
 #ROUTING FOR REFEREES
 @app.route("/referee")
 def referee():
