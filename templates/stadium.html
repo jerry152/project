@@ -53,9 +53,21 @@
         <input type="Submit" class = "file_submit" value="check">
     </div>
     </form>
-    {% if answer%}
-        <label>{{answer[0]}},{{answer[1]}},{{answer[2]}}</label>
-    {% endif %}
+    {% for row in answer%}
+        <label>{{row[0]}},{{row[1]}},{{row[2]}}</label>
+    {% endfor %}
+
+    <form class="grid" action="/maxPeople" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Enter an amount of people to see which stadiums have that capacity</label>
+        <input type="text" name="name">
+        <input type="Submit" class= "file_submit">
+    </div>
+    </form>
+
+    {% for row in info%}
+        <label>{{row[0],row[1]}}</label>
+    {% endfor %}
 
 
 </body>

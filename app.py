@@ -145,6 +145,43 @@ def referee():
     data = mycursor.fetchall()
     return render_template("referee.html", data = data)
 
+@app.route("/cityRef", methods = ['POST', "GET"])
+def cityRef():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Referee")
+    data = mycursor.fetchall()
+    results1 = request.form['state1']
+    sql = """
+    SELECT rf_name, r_name, r_state
+    FROM Referee
+    JOIN Regions on rf_cityKey = r_cityKey
+    WHERE r_state = ?
+    """
+    args = [results1]
+    mycursor.execute(sql,args)
+    info = mycursor.fetchall()
+    return render_template("referee.html", data = data, answer = info)
+
+@app.route("/mostRef", methods = ['POST', "GET"])
+def mostRef():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Referee")
+    data = mycursor.fetchall()
+    results1 = request.form['stadium']
+    sql = """
+    SELECT rf_name
+    FROM Referee
+    JOIN Regions on rf_cityKey = r_cityKey
+    JOIN Stadium on r_cityKey = st_cityKey
+    WHERE st_name = ?
+    """
+    args = [results1]
+    mycursor.execute(sql,args)
+    info = mycursor.fetchall()
+    return render_template("referee.html", data = data, info = info)
+
 
 
 #ROUTING FOR SPONSOR PAGE
@@ -207,6 +244,25 @@ def largestStadium():
     answer = mycursor.fetchall()
 
     return render_template("stadium.html", data = data, answer = answer)
+
+@app.route("/maxPeople", methods = ['POST', "GET"])
+def maxPeople():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    results1 = request.form['name']
+    sql = """
+    SELECT st_name, st_maxpeople
+    FROM Stadium
+    WHERE st_maxpeople >= ?
+    """
+    args = [results1]
+    mycursor.execute(sql,args)
+    answer = mycursor.fetchall()
+    
+
+    return render_template("stadium.html", data = data, info = answer)
 
 
 #ROUTING FOR INFO PAGE

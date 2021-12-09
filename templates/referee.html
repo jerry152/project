@@ -35,6 +35,46 @@
                {% endfor %}
            </tbody>
        </table>
+    <form class="grid" action="/cityRef" method="post">
+        <div class = "d-inline">
+            <label for = "query1">Choose a state to see which refs work there</label>
+            <select name="state1" id="stadium">
+                <option value="New York">New York</option>
+                <option value="California">California</option>
+                <option value="England">England</option>
+                <option value="Mexico City">Mexico City</option>
+                <option value="Michigan">Michigan</option>
+                <option value="Nevada">Nevada</option>
+                <option value="New Jersey">New Jersey</option>
+            </select>
+            <input type="Submit" class = "file_submit" value="check">
+        </div>
+    </form>
+    {% if answer%}
+    <label>{{answer[0]}},{{answer[1]}},{{answer[2]}}</label>
+    {% endif %}
+
+    <form class="grid" action="/mostRef" method="post">
+        <div class = "d-inline">
+            <label for = "query1">Choose a stadium to see which refs can work there </label>
+            <select name="stadium" id="stadium">
+                <option value="Yankee Stadium">Yankee Stadium</option>
+                <option value="Cow Palace Stadium">Cow Palace Stadium</option>
+                <option value="York Hall">York Hall</option>
+                <option value="Aztec Stadium">Aztec Stadium</option>
+                <option value="Olympic Stadium">Olympic Stadium</option>
+                <option value="Great Western Forum Arena">Great Western Forum Arena</option>
+                <option value="MGM Grand Hotel">MGM Grand Hotel</option>
+                <option value="Atlantic City Boardwalk">Atlantic City Boardwalk</option>
+                <option value="Caesars Palace">Caesars Palace</option>
+                <option value="Madison Square Garden">Madison Square Garden</option>
+            </select>
+            <input type="Submit" class = "file_submit" value="check">
+        </div>
+    </form>
+    {% for row in info%}
+    <label>{{row[0]}}</label>
+    {% endfor %}
 
 
 </body>
