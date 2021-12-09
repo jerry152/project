@@ -343,7 +343,13 @@ def maxPeople():
 #ROUTING FOR INFO PAGE
 @app.route("/info")
 def info():
-    return render_template("info.html")
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT s_name FROM Sponsors")
+    data = mycursor.fetchall()
+    mycursor.execute("SELECT f_name FROM Fighters")
+    data1 = mycursor.fetchall()
+    return render_template("info.html", data = data, data1 = data1)
 
 @app.route("/addFighter", methods = ['POST', "GET"])
 def addFighter():
@@ -351,6 +357,10 @@ def addFighter():
     results2 = request.form['name']
     c = sqlite3.connect(r"boxing.sqlite")
     mycursor = c.cursor()
+    mycursor.execute("SELECT s_name FROM Sponsors")
+    data = mycursor.fetchall()
+    mycursor.execute("SELECT f_name FROM Fighters")
+    data1 = mycursor.fetchall()
     mycursor.execute("""
     SELECT COUNT(DISTINCT f_name)
     FROM Fighters""")
@@ -369,9 +379,34 @@ def addFighter():
         """
     args = [results2,key1]
     mycursor.execute(sql,args)
+    c.commit()
     c.close()
 
-    return render_template("info.html")
+    return render_template("info.html", data = data, data1 = data1)
+
+@app.route("/addSponsor", methods = ['POST', "GET"])
+def addSponsor():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT s_name FROM Sponsors")
+    data = mycursor.fetchall()
+    mycursor.execute("SELECT f_name FROM Fighters")
+    data1 = mycursor.fetchall()
+    result1 = request.form['sponsor']
+    result2 = request.form['fighter']
+    print(result1,result2)
+    sql = """
+    INSERT INTO SponsoredFighter(sp_fighterKey,sp_sponsorKey)
+    SELECT f_fighterKey, s_sponsorKey
+    FROM Fighters, Sponsors
+    WHERE s_name = ?
+    AND f_name = ?
+    """
+    args = [result1,result2]
+    mycursor.execute(sql,args)
+    c.commit()
+    c.close()
+    return render_template("info.html", data = data, data1 = data1)
 
 
 

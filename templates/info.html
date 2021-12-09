@@ -19,7 +19,24 @@
             <option value='min'>min stats</option>
             <option value='max'>max stats</option>
         </select>
-        <input type="Submit" class = "file_submit" value="check">
+        <input type="Submit" class = "file_submit" value="add">
+    </div>
+    </form>
+
+    <form class="grid" action="/addSponsor" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Add sponsor to fighter</label>
+        <select name="sponsor" id="option">
+            {% for row in data %}
+            <option value='{{row[0]}}'>{{row[0]}}</option>
+            {% endfor %}
+        </select>
+        <select name="fighter" id="option">
+            {% for row in data1 %}
+            <option value='{{row[0]}}'>{{row[0]}}</option>
+            {% endfor %}
+        </select>
+        <input type="Submit" class = "file_submit" value="add">
     </div>
     </form>
 
