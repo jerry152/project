@@ -112,8 +112,29 @@ def bestFighter():
 
 
     return render_template("fighter.html",fighter = query[0], data = data)
+#fighter record
+@app.route("/fighterRec",methods = ['POST', "GET"])
+def fighterRec():
+    results3 = request.form['fighter3']
+    print(results3)
+    database = r"boxing.sqlite"
+    conn = openConnection(database)
+    _conn = conn.cursor()
+    sql = """ 
+SELECT *
+FROM Fighters
+Where f_name = ?
+    """
+    args = [results3]
+    _conn.execute(sql,args)
+    query = _conn.fetchall()
+    print(query)
+    _conn.execute("SELECT * FROM Fighters")
+    data = _conn.fetchall()
 
 
+    return render_template("fighter.html",Rec = query, data = data, name = results3)
+    
 
 #ROUTING FOR REFEREES
 @app.route("/referee")

@@ -36,6 +36,53 @@
            </tbody>
        </table>
 
+       <form class="grid" action="/fighterRec" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Choose fighter to get Record</label>
+       <select name="fighter3" id="fighter">
+        <option value="Canelo">Canelo</option>
+        <option value="Gennedy Golovken">Gennedy Golovken</option>
+        <option value="Floyd Mayweatther ">Floyd Mayweather</option>
+        <option value="Deontay Wilder">Deontay Wilder</option>
+        <option value="Manny Pacquiao">Manny Pacquiao</option>
+        <option value="Mike Tyson">Mike Tyson</option>
+        <option value="Andy Ruiz jr">Andy Ruiz jr</option>
+        <option value="Tyson Fury">Tyson Fury</option>
+        <option value="Anthony Joshua">Anthony Joshua</option>
+        <option value="Boxer">Boxer</option>
+    </select>
+    <input type="Submit" class = "file_submit" value="check">
+</div>
+</form>
+{% if Rec %}
+<table>
+    <thead>
+      <tr>
+          <th>fighter</th>
+          <th>coach</th>
+          <th>wins</th>
+          <th>lost</th>
+          <th>tie</th>
+          <th>salary</th>
+          <th>Championships</th>
+      </tr>
+      </thead>    
+      <tbody>
+       {% for row in Rec %}    
+              
+           <td>{{row[0]}}</td>
+           <td>{{row[1]}}</td>
+           <td>{{row[2]}}</td>
+           <td>{{row[3]}}</td>
+           <td>{{row[8]}}</td>
+           <td>{{row[4]}}</td>
+           <td>{{row[5]}}</td>
+                  
+          {% endfor %}
+      </tbody>
+  </table>
+{% endif %}
+
 
        <form class="grid" action="/bestFighter" method="post">
         <div class = "d-inline">
@@ -43,7 +90,7 @@
         <select name="fighter1" id="fighter">
             <option value="Canelo">Canelo</option>
             <option value="Gennedy Golovken">Gennedy Golovken</option>
-            <option value="Floyd Mayweatther">Floyd Mayweatther</option>
+            <option value="Floyd Mayweatther ">Floyd Mayweather</option>
             <option value="Deontay Wilder">Deontay Wilder</option>
             <option value="Manny Pacquiao">Manny Pacquiao</option>
             <option value="Mike Tyson">Mike Tyson</option>
@@ -56,7 +103,7 @@
         <select name="fighter2" id="fighter">
             <option value="Canelo">Canelo</option>
             <option value="Gennedy Golovken">Gennedy Golovken</option>
-            <option value="Floyd Mayweatther">Floyd Mayweatther</option>
+            <option value="Floyd Mayweatther ">Floyd Mayweatther</option>
             <option value="Deontay Wilder">Deontay Wilder</option>
             <option value="Manny Pacquiao">Manny Pacquiao</option>
             <option value="Mike Tyson">Mike Tyson</option>
