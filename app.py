@@ -122,9 +122,9 @@ def fighterRec():
     conn = openConnection(database)
     _conn = conn.cursor()
     sql = """ 
-SELECT *
-FROM Fighters
-Where f_name = ?
+    SELECT *
+    FROM Fighters
+    Where f_name = ?
     """
     args = [results3]
     _conn.execute(sql,args)
@@ -166,7 +166,11 @@ def referee():
     mycursor = c.cursor()
     mycursor.execute("SELECT * FROM Referee")
     data = mycursor.fetchall()
-    return render_template("referee.html", data = data)
+    mycursor.execute("SELECT DISTINCT r_state FROM Regions")
+    data1 = mycursor.fetchall()
+    mycursor.execute("SELECT st_name FROM Stadium")
+    data2 = mycursor.fetchall()
+    return render_template("referee.html", data = data, data1 = data1, data2 = data2)
 
 @app.route("/cityRef", methods = ['POST', "GET"])
 def cityRef():
@@ -174,6 +178,10 @@ def cityRef():
     mycursor = c.cursor()
     mycursor.execute("SELECT * FROM Referee")
     data = mycursor.fetchall()
+    mycursor.execute("SELECT DISTINCT r_state FROM Regions")
+    data1 = mycursor.fetchall()
+    mycursor.execute("SELECT st_name FROM Stadium")
+    data2 = mycursor.fetchall()
     results1 = request.form['state1']
     sql = """
     SELECT rf_name, r_name, r_state
@@ -184,7 +192,7 @@ def cityRef():
     args = [results1]
     mycursor.execute(sql,args)
     info = mycursor.fetchall()
-    return render_template("referee.html", data = data, answer = info)
+    return render_template("referee.html", data = data, data1 = data1, answer = info, data2 = data2)
 
 @app.route("/mostRef", methods = ['POST', "GET"])
 def mostRef():
@@ -192,6 +200,10 @@ def mostRef():
     mycursor = c.cursor()
     mycursor.execute("SELECT * FROM Referee")
     data = mycursor.fetchall()
+    mycursor.execute("SELECT DISTINCT r_state FROM Regions")
+    data1 = mycursor.fetchall()
+    mycursor.execute("SELECT st_name FROM Stadium")
+    data2 = mycursor.fetchall()
     results1 = request.form['stadium']
     sql = """
     SELECT rf_name
@@ -203,7 +215,7 @@ def mostRef():
     args = [results1]
     mycursor.execute(sql,args)
     info = mycursor.fetchall()
-    return render_template("referee.html", data = data, info = info)
+    return render_template("referee.html", data = data, data1 = data1, info = info, data2 = data2)
 
 
 
@@ -214,8 +226,10 @@ def sponsor():
     mycursor = c.cursor()
     mycursor.execute("SELECT s_name FROM Sponsors")
     data = mycursor.fetchall()
+    mycursor.execute("SELECT f_name FROM Fighters")
+    data1 = mycursor.fetchall()
 
-    return render_template("sponsor.html", data = data)
+    return render_template("sponsor.html", data = data, data1 = data1)
 
 @app.route("/sponsorQ",methods = ['POST', "GET"])
 def sponsorQ():
@@ -223,6 +237,8 @@ def sponsorQ():
     mycursor = c.cursor()
     mycursor.execute("SELECT s_name FROM Sponsors")
     data = mycursor.fetchall()
+    mycursor.execute("SELECT f_name FROM Fighters")
+    data1 = mycursor.fetchall()
     results1 = request.form['sponsor1']
     sql = """
     SELECT f_name, r_country
@@ -234,69 +250,9 @@ def sponsorQ():
     """
     args = [results1]
     mycursor.execute(sql,args)
-    data1 = mycursor.fetchall()
-    print(data1)
-    return render_template("sponsor.html", data = data, sponsor = results1,list = data1)
-
-
-
-#ROUTING FOR STADIUM PAGE
-@app.route("/stadium")
-def stadium():
-    c = sqlite3.connect(r"boxing.sqlite")
-    mycursor = c.cursor()
-    mycursor.execute("SELECT * FROM Stadium")
-    data = mycursor.fetchall()
-    return render_template("stadium.html", data = data)
-
-@app.route("/largestStadium",methods = ['POST',"GET"])
-def largestStadium():
-    c = sqlite3.connect(r"boxing.sqlite")
-    mycursor = c.cursor()
-    mycursor.execute("SELECT * FROM Stadium")
-    data = mycursor.fetchall()
-    results1 = request.form['state1']
-    sql = """
-    SELECT st_name, MAX(st_size), st_maxpeople
-    FROM Stadium
-    JOIN Regions on st_cityKey = r_cityKey
-    WHERE r_state = ?
-    """
-    args = [results1]
-    mycursor.execute(sql,args)
-    answer = mycursor.fetchall()
-
-    return render_template("stadium.html", data = data, answer = answer)
-
-@app.route("/maxPeople", methods = ['POST', "GET"])
-def maxPeople():
-    c = sqlite3.connect(r"boxing.sqlite")
-    mycursor = c.cursor()
-    mycursor.execute("SELECT * FROM Stadium")
-    data = mycursor.fetchall()
-    results1 = request.form['name']
-    sql = """
-    SELECT st_name, st_maxpeople
-    FROM Stadium
-    WHERE st_maxpeople >= ?
-    """
-    args = [results1]
-    mycursor.execute(sql,args)
-    answer = mycursor.fetchall()
+    fighter = mycursor.fetchall()
+    return render_template("sponsor.html", data = data, data1 = data1, sponsor = results1,list = fighter)
     
-
-    return render_template("stadium.html", data = data, info = answer)
-
-
-#ROUTING FOR INFO PAGE
-@app.route("/info")
-def info():
-    return render_template("info.html")
-
-
-
-
-
     # gonna show the user how much money a selected fighter has made 
 @app.route("/MoneySponsor",methods = ['POST', "GET"])
 def MoneySponsor():
@@ -317,9 +273,101 @@ def MoneySponsor():
     print(query)
     _conn.execute("SELECT s_name FROM Sponsors")
     data = _conn.fetchall()
+    _conn.execute("SELECT f_name FROM Fighters")
+    data1 = _conn.fetchall()
+
+    return render_template("sponsor.html",fighter = query, data = data, data1 = data1, name = results1)
 
 
-    return render_template("sponsor.html",fighter = query, data = data, name = results1)
+
+#ROUTING FOR STADIUM PAGE
+@app.route("/stadium")
+def stadium():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    mycursor.execute("SELECT DISTINCT r_state FROM Regions")
+    data1 = mycursor.fetchall()
+    return render_template("stadium.html", data = data, data1 = data1)
+
+@app.route("/largestStadium",methods = ['POST',"GET"])
+def largestStadium():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    mycursor.execute("SELECT DISTINCT r_state FROM Regions")
+    data1 = mycursor.fetchall()
+    results1 = request.form['state1']
+    sql = """
+    SELECT st_name, MAX(st_size), st_maxpeople
+    FROM Stadium
+    JOIN Regions on st_cityKey = r_cityKey
+    WHERE r_state = ?
+    """
+    args = [results1]
+    mycursor.execute(sql,args)
+    answer = mycursor.fetchall()
+
+    return render_template("stadium.html", data = data, data1 = data1, answer = answer)
+
+@app.route("/maxPeople", methods = ['POST', "GET"])
+def maxPeople():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    mycursor.execute("SELECT DISTINCT r_state FROM Regions")
+    data1 = mycursor.fetchall()
+    results1 = request.form['name']
+    sql = """
+    SELECT st_name, st_maxpeople
+    FROM Stadium
+    WHERE st_maxpeople >= ?
+    """
+    args = [results1]
+    mycursor.execute(sql,args)
+    answer = mycursor.fetchall()
+    
+
+    return render_template("stadium.html", data = data, data1 = data1, info = answer)
+
+
+#ROUTING FOR INFO PAGE
+@app.route("/info")
+def info():
+    return render_template("info.html")
+
+@app.route("/addFighter", methods = ['POST', "GET"])
+def addFighter():
+    results1 = request.form['option']
+    results2 = request.form['name']
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("""
+    SELECT COUNT(DISTINCT f_name)
+    FROM Fighters""")
+    key = mycursor.fetchall()
+    key1 = key[0][0] + 1
+    print(results2)
+    if 'max' in results1:
+        sql = """
+        INSERT INTO Fighters
+        VALUES(?,'Floyd Mayweather Sr',80,0,1000000,100,?,2,0)
+        """
+    else:
+        sql = """
+        INSERT INTO Fighters
+        VALUES(?,'Teddy Atlas',0,100,100,0,?,2,10)
+        """
+    args = [results2,key1]
+    mycursor.execute(sql,args)
+    mycursor.close()
+
+    return render_template("info.html")
+
+
 
 
 def openConnection(_dbFile):

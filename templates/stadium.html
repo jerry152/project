@@ -42,13 +42,9 @@
         <div class = "d-inline">
         <label for = "query1">Choose a state to see its biggest stadium stats</label>
         <select name="state1" id="stadium">
-            <option value="New York">New York</option>
-            <option value="California">California</option>
-            <option value="England">Englande</option>
-            <option value="Mexico City">Mexico City</option>
-            <option value="Michigan">Michigan</option>
-            <option value="Nevada">Nevada</option>
-            <option value="New Jersey">New Jersey</option>
+            {% for row in data1 %}
+            <option value='{{row[0]}}'>{{row[0]}}</option>
+            {% endfor %}
         </select>
         <input type="Submit" class = "file_submit" value="check">
     </div>

@@ -197,7 +197,8 @@ FROM  Coaches, Regions
 WHERE c_name = 'Chepo Reynoso'
 and c_citykey = r_cityKey;
 
-
+SELECT COUNT(DISTINCT f_name)
+FROM Fighters;
 
 -- SELECT c_name, max(f_wins), f_name
 -- FROM Fighters, Coaches

@@ -11,7 +11,17 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-
+    <form class="grid" action="/addFighter" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Add fighter with min or max stats</label>
+        <input type="text" name="name">
+        <select name="option" id="option">
+            <option value='min'>min stats</option>
+            <option value='max'>max stats</option>
+        </select>
+        <input type="Submit" class = "file_submit" value="check">
+    </div>
+    </form>
 
 </body>
 </html>

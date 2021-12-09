@@ -40,13 +40,9 @@
         <div class = "d-inline">
         <label for = "query1">Choose a sponsor,to see their fighters and country </label>
         <select name="sponsor1" id="sponsor">
-            <option value="burgerKing">Burger King</option>
-            <option value="underArmor">Under Armor</option>
-            <option value="adidas">Adidas</option>
-            <option value="budlight">Budlight</option>
-            <option value="nike">Nike</option>
-            <option value="corona">Corona</option>
-            <option value="modelo">Modelo</option>
+            {% for row in data %}
+            <option value='{{row[0]}}'>{{row[0]}}</option>
+            {% endfor %}
         </select>
         <input type="Submit" class = "file_submit" value="check">
     </div>
@@ -67,16 +63,9 @@
         <div class = "d-inline">
         <label for = "query1">Choose a fighters to see money made from sponsor</label>
         <select name="fighter1" id="fighter">
-            <option value="Canelo">Canelo</option>
-            <option value="Gennedy Golovken">Gennedy Golovken</option>
-            <option value="Floyd Mayweatther ">Floyd Mayweatther</option>
-            <option value="Deontay Wilder">Deontay Wilder</option>
-            <option value="Manny Pacquiao">Manny Pacquiao</option>
-            <option value="Mike Tyson">Mike Tyson</option>
-            <option value="Andy Ruiz jr">Andy Ruiz jr</option>
-            <option value="Tyson Fury">Tyson Fury</option>
-            <option value="Anthony Joshua">Anthony Joshua</option>
-            <option value="Boxer">Boxer</option>
+            {% for row in data1 %}
+            <option value='{{row[0]}}'>{{row[0]}}</option>
+            {% endfor %}
         </select>
         <input type="Submit" class = "file_submit" value="check">
     </div>
