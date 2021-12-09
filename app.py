@@ -48,9 +48,9 @@ def bestFighter():
     conn = openConnection(database)
     _conn = conn.cursor()
     sql = """
-    SELECT f_name
+    SELECT f_name, f_wins, f_losses, f_ties
     FROM(
-        SELECT f_name, MAX(f_wins)
+        SELECT f_name, MAX(f_wins), f_wins, f_losses, f_ties
         FROM Fighters 
         WHERE f_name = ?
         OR f_name = ?
@@ -64,7 +64,7 @@ def bestFighter():
     data = _conn.fetchall()
 
 
-    return render_template("fighter.html",fighter = query, data = data)
+    return render_template("fighter.html",fighter = query[0], data = data)
 
 
 
