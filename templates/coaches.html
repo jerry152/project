@@ -35,6 +35,48 @@
                {% endfor %}
            </tbody>
        </table>
+
+
+       <form class="grid" action="/trainedFighters" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Choose a Coach to see who they have trained</label>
+        <select name="coaches1" id="coaches">
+            <option value="Freddie Roach">Freddie Roach</option>
+            <option value="Floyd Mayweather Sr">Floyd Mayweather Sr</option>
+            <option value="Chepo Reynoso">Chepo Reynoso</option>
+            <option value="Cuz Dmato">Cuz Dmato"</option>
+            <option value="Teddy Atlas">Teddy Atlas</option>
+  
+        </select>
+        <input type="Submit" class = "file_submit" value="check">
+    </div>
+    </form>
+
+    {%if fighter %}
+        <h3>{{name}} has trained {{fighter}}</h3>
+    {%endif%} 
+
+    
+    <form class="grid" action="/coachesCity" method="post">
+        <div class = "d-inline">
+        <label for = "query1">Choose a Coach to see where they are form</label>
+        <select name="coaches2" id="coaches">
+            <option value="Freddie Roach">Freddie Roach</option>
+            <option value="Floyd Mayweather Sr">Floyd Mayweather Sr</option>
+            <option value="Chepo Reynoso">Chepo Reynoso</option>
+            <option value="Cuz Dmato">Cuz Dmato"</option>
+            <option value="Teddy Atlas">Teddy Atlas</option>
+  
+        </select>
+        <input type="Submit" class = "file_submit" value="check">
+    </div>
+    </form>
+
+    {%if city %}
+        <h3>{{name}} is form {{city}}</h3>
+    {%endif%} 
+
+
     
 
 </body>
