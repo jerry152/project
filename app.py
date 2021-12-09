@@ -26,6 +26,7 @@ def coaches():
     mycursor = c.cursor()
     mycursor.execute("SELECT * FROM Coaches")
     data = mycursor.fetchall()
+    c.close()
     return render_template("coaches.html", data = data)
 
 # choose coach the show there fighters 
@@ -49,7 +50,7 @@ and f_coachName = c_name;
     _conn.execute("SELECT * FROM Coaches")
     data = _conn.fetchall()
 
-
+    conn.close()
     return render_template("coaches.html",fighter = query, data = data, name = results1)
 
 #where are the coaches from
@@ -73,7 +74,7 @@ and c_citykey = r_cityKey;
     _conn.execute("SELECT * FROM Coaches")
     data = _conn.fetchall()
 
-
+    conn.close()
     return render_template("coaches.html",city = query, data = data, name = results2)
     
 
@@ -111,7 +112,7 @@ def bestFighter():
     _conn.execute("SELECT * FROM Fighters")
     data = _conn.fetchall()
 
-
+    conn.close()
     return render_template("fighter.html",fighter = query[0], data = data)
 #fighter record
 @app.route("/fighterRec",methods = ['POST', "GET"])
@@ -133,7 +134,7 @@ def fighterRec():
     _conn.execute("SELECT * FROM Fighters")
     data = _conn.fetchall()
 
-
+    conn.close()
     return render_template("fighter.html",Rec = query, data = data, name = results3)
     
 # where the fighters are from
@@ -157,7 +158,7 @@ and f_citykey = r_cityKey;
     _conn.execute("SELECT * FROM Fighters")
     data = _conn.fetchall()
 
-
+    conn.close()
     return render_template("fighter.html",city = query, data = data, name = results2)
 #ROUTING FOR REFEREES
 @app.route("/referee")
@@ -170,6 +171,7 @@ def referee():
     data1 = mycursor.fetchall()
     mycursor.execute("SELECT st_name FROM Stadium")
     data2 = mycursor.fetchall()
+    c.close()
     return render_template("referee.html", data = data, data1 = data1, data2 = data2)
 
 @app.route("/cityRef", methods = ['POST', "GET"])
@@ -192,6 +194,7 @@ def cityRef():
     args = [results1]
     mycursor.execute(sql,args)
     info = mycursor.fetchall()
+    c.close()
     return render_template("referee.html", data = data, data1 = data1, answer = info, data2 = data2)
 
 @app.route("/mostRef", methods = ['POST', "GET"])
@@ -215,6 +218,7 @@ def mostRef():
     args = [results1]
     mycursor.execute(sql,args)
     info = mycursor.fetchall()
+    c.close()
     return render_template("referee.html", data = data, data1 = data1, info = info, data2 = data2)
 
 
@@ -228,7 +232,7 @@ def sponsor():
     data = mycursor.fetchall()
     mycursor.execute("SELECT f_name FROM Fighters")
     data1 = mycursor.fetchall()
-
+    c.close()
     return render_template("sponsor.html", data = data, data1 = data1)
 
 @app.route("/sponsorQ",methods = ['POST', "GET"])
@@ -251,6 +255,7 @@ def sponsorQ():
     args = [results1]
     mycursor.execute(sql,args)
     fighter = mycursor.fetchall()
+    c.close()
     return render_template("sponsor.html", data = data, data1 = data1, sponsor = results1,list = fighter)
     
     # gonna show the user how much money a selected fighter has made 
@@ -275,7 +280,7 @@ def MoneySponsor():
     data = _conn.fetchall()
     _conn.execute("SELECT f_name FROM Fighters")
     data1 = _conn.fetchall()
-
+    conn.close()
     return render_template("sponsor.html",fighter = query, data = data, data1 = data1, name = results1)
 
 
@@ -289,6 +294,7 @@ def stadium():
     data = mycursor.fetchall()
     mycursor.execute("SELECT DISTINCT r_state FROM Regions")
     data1 = mycursor.fetchall()
+    c.close()
     return render_template("stadium.html", data = data, data1 = data1)
 
 @app.route("/largestStadium",methods = ['POST',"GET"])
@@ -309,7 +315,7 @@ def largestStadium():
     args = [results1]
     mycursor.execute(sql,args)
     answer = mycursor.fetchall()
-
+    c.close()
     return render_template("stadium.html", data = data, data1 = data1, answer = answer)
 
 @app.route("/maxPeople", methods = ['POST', "GET"])
@@ -330,7 +336,7 @@ def maxPeople():
     mycursor.execute(sql,args)
     answer = mycursor.fetchall()
     
-
+    c.close()
     return render_template("stadium.html", data = data, data1 = data1, info = answer)
 
 
@@ -363,7 +369,7 @@ def addFighter():
         """
     args = [results2,key1]
     mycursor.execute(sql,args)
-    mycursor.close()
+    c.close()
 
     return render_template("info.html")
 
