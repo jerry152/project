@@ -107,6 +107,10 @@ WHERE r_country != 'USA';
 --         FROM Coaches
 --     )
 -- );
+    SELECT st_name, MAX(st_size), st_maxpeople
+    FROM Stadium
+    JOIN Regions on st_cityKey = r_cityKey
+    WHERE r_state = 'California'
 --16 Which fighter has the best win to loss ratio
 -- SELECT f_name
 -- FROM(

@@ -121,6 +121,24 @@ def stadium():
     data = mycursor.fetchall()
     return render_template("stadium.html", data = data)
 
+@app.route("/largestStadium",methods = ['POST',"GET"])
+def largestStadium():
+    c = sqlite3.connect(r"boxing.sqlite")
+    mycursor = c.cursor()
+    mycursor.execute("SELECT * FROM Stadium")
+    data = mycursor.fetchall()
+    results1 = request.form['state1']
+    sql = """
+    SELECT st_name, MAX(st_size), st_maxpeople
+    FROM Stadium
+    JOIN Regions on st_cityKey = r_cityKey
+    WHERE r_state = ?
+    """
+    args = [results1]
+    mycursor.execute(sql,args)
+    answer = mycursor.fetchall()
+
+    return render_template("stadium.html", data = data, answer = answer)
 
 
 #ROUTING FOR INFO PAGE

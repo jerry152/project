@@ -38,37 +38,25 @@
        </table>
 
 	</nav>
-    <form class="grid" action="/bestFighter" method="post">
+    <form class="grid" action="/largestStadium" method="post">
         <div class = "d-inline">
-        <label for = "query1">Choose two fighters to get better score</label>
-        <select name="stadium1" id="fighter">
-            <option value="Canelo">Canelo</option>
-            <option value="Gennedy Golovken">Gennedy Golovken</option>
-            <option value="Floyd Mayweatther">Floyd Mayweatther</option>
-            <option value="Deontay Wilder">Deontay Wilder</option>
-            <option value="Manny Pacquiao">Manny Pacquiao</option>
-            <option value="Mike Tyson">Mike Tyson</option>
-            <option value="Andy Ruiz jr">Andy Ruiz jr</option>
-            <option value="Tyson Fury">Tyson Fury</option>
-            <option value="Anthony Joshua">Anthony Joshua</option>
-            <option value="Boxer">Boxer</option>
-        </select>
-        <h3>vs</h3>
-        <select name="fighter2" id="fighter">
-            <option value="Canelo">Canelo</option>
-            <option value="Gennedy Golovken">Gennedy Golovken</option>
-            <option value="Floyd Mayweatther">Floyd Mayweatther</option>
-            <option value="Deontay Wilder">Deontay Wilder</option>
-            <option value="Manny Pacquiao">Manny Pacquiao</option>
-            <option value="Mike Tyson">Mike Tyson</option>
-            <option value="Andy Ruiz jr">Andy Ruiz jr</option>
-            <option value="Tyson Fury">Tyson Fury</option>
-            <option value="Anthony Joshua">Anthony Joshua</option>
-            <option value="Boxer">Boxer</option>
+        <label for = "query1">Choose a state to see its biggest stadium stats</label>
+        <select name="state1" id="stadium">
+            <option value="New York">New York</option>
+            <option value="California">California</option>
+            <option value="England">Englande</option>
+            <option value="Mexico City">Mexico City</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Jersey">New Jersey</option>
         </select>
         <input type="Submit" class = "file_submit" value="check">
     </div>
     </form>
+    {% if answer%}
+        <label>{{answer[0]}},{{answer[1]}},{{answer[2]}}</label>
+    {% endif %}
+
 
 </body>
 </html>
