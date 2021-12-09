@@ -187,10 +187,16 @@ WHERE r_country != 'USA';
 -- where st_name = 'MGM Grand Hotel') 
 -- ;
 
-SELECT c_name , f_name
+SELECT c_name , f_name, Max(f_wins)
 FROM Fighters, Coaches
-WHERE c_name = 'Chepo Reynoso'
+WHERE c_name = 'Freddie Roach'
 and f_coachName = c_name;
+
+SELECT r_name, r_state, r_country
+FROM  Coaches, Regions
+WHERE c_name = 'Freddie Roach'
+and f_coachName = c_name
+and c_citykey = r_cityKey;
 
 
 

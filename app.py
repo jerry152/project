@@ -51,6 +51,29 @@ and f_coachName = c_name;
 
 
     return render_template("coaches.html",fighter = query, data = data, name = results1)
+#where are the coaches from
+@app.route("/coachesCity",methods = ['POST', "GET"])
+def coachesCity():
+    results2 = request.form['coaches2']
+    print(results2)
+    database = r"boxing.sqlite"
+    conn = openConnection(database)
+    _conn = conn.cursor()
+    sql = """ 
+SELECT r_name, r_state, r_country
+FROM  Coaches, Regions
+WHERE c_name = ?
+and c_citykey = r_cityKey;
+    """
+    args = [results2]
+    _conn.execute(sql,args)
+    query = _conn.fetchall()
+    print(query)
+    _conn.execute("SELECT * FROM Coaches")
+    data = _conn.fetchall()
+
+
+    return render_template("coaches.html",city = query, data = data, name = results2)
     
 
 
