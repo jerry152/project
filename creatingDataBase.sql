@@ -187,5 +187,22 @@ WHERE r_country != 'USA';
 -- where st_name = 'MGM Grand Hotel') 
 -- ;
 
+SELECT c_name , f_name
+FROM Fighters, Coaches
+WHERE c_name = 'Chepo Reynoso'
+and f_coachName = c_name;
 
+
+
+-- SELECT c_name, max(f_wins), f_name
+-- FROM Fighters, Coaches
+-- WHERE f_coachName IN (
+--     SELECT c_name
+--     FROM(
+--         SELECT c_name, max(c_numFighters)
+--         FROM Coaches,Fighters
+        
+--     )
+--     where f_name = 'Mike Tyson'
+-- );
 

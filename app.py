@@ -27,6 +27,30 @@ def coaches():
     mycursor.execute("SELECT * FROM Coaches")
     data = mycursor.fetchall()
     return render_template("coaches.html", data = data)
+
+# choose coach the show there fighters 
+@app.route("/trainedFighters",methods = ['POST', "GET"])
+def trainedFighters():
+    results1 = request.form['coaches1']
+    print(results1)
+    database = r"boxing.sqlite"
+    conn = openConnection(database)
+    _conn = conn.cursor()
+    sql = """ 
+SELECT f_name
+FROM Fighters, Coaches
+WHERE c_name = ?
+and f_coachName = c_name;
+    """
+    args = [results1]
+    _conn.execute(sql,args)
+    query = _conn.fetchall()
+    print(query)
+    _conn.execute("SELECT * FROM Coaches")
+    data = _conn.fetchall()
+
+
+    return render_template("coaches.html",fighter = query, data = data, name = results1)
     
 
 
