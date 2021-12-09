@@ -40,20 +40,26 @@
         <div class = "d-inline">
         <label for = "query1">Choose a sponsor,to see their fighters and country </label>
         <select name="sponsor1" id="sponsor">
-            <option value="Burger King">Burger King</option>
-            <option value="Under Armor">Under Armor</option>
-            <option value="Adidas">Adidas</option>
-            <option value="Budlight">Budlight</option>
-            <option value="Nike">Nike</option>
-            <option value="Corona">Corona</option>
-            <option value="Modelo">Modelo</option>
+            <option value="burgerKing">Burger King</option>
+            <option value="underArmor">Under Armor</option>
+            <option value="adidas">Adidas</option>
+            <option value="budlight">Budlight</option>
+            <option value="nike">Nike</option>
+            <option value="corona">Corona</option>
+            <option value="modelo">Modelo</option>
         </select>
         <input type="Submit" class = "file_submit" value="check">
     </div>
     </form>
 
-    {% if sponsor %}
-        <h3>{{sponsor}} sponsors {{fighter}} and is from {{country}}</h3>
+    {% if list %}
+        
+    {% for row in list %}    
+                   
+    <td>{{row[0],row[1]}}</td>
+           
+       
+   {% endfor %}
     {% endif %}
 
    

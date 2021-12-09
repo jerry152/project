@@ -97,15 +97,18 @@ def sponsorQ():
     data = mycursor.fetchall()
     results1 = request.form['sponsor1']
     sql = """
-    -- SELECT s_name, r_name
+    SELECT f_name, r_country
     FROM Sponsors
     JOIN SponsoredFighter on s_sponsorKey = sp_sponsorKey
     JOIN Fighters on sp_fighterKey = f_fighterKey
     JOIN Regions on f_cityKey = r_cityKey
-    WHERE r_country = 'USA'
-    AND s_televised = 'yes'
+    WHERE s_name = ?
     """
-    return render_template("sponsor.html", data = data, sponsor = results1)
+    args = [results1]
+    mycursor.execute(sql,args)
+    data1 = mycursor.fetchall()
+    print(data1)
+    return render_template("sponsor.html", data = data, sponsor = results1,list = data1)
 
 
 
